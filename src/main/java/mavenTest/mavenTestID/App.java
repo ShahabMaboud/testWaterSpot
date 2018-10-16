@@ -1,6 +1,7 @@
 package mavenTest.mavenTestID;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +16,7 @@ public class App extends JPanel {
 		g.fillRect(1, 1, 600, 600);
 
 		/////////////////////////////  generating land array VARS
-		int[] lndScap = new int[] { 9, 2, 3, 4, 8, 4, 0, 3 ,1 };
+		int[] lndScap = new int[] { 8, 2, 3, 7, 5, 4, 0, 3 ,1 };
 		int[] waterArr = new int[lndScap.length];
 		int recX = 5;
 		int numberOFRec;
@@ -64,42 +65,74 @@ public class App extends JPanel {
 			            }
 			            waterArr [i] = Integer.max(Integer.min(maxSeenLeft, maxSeenRight[i]) - lndScap[i], 0);
 			        }
+			            g.setColor(Color.red);
+			            g.setFont(new Font("TimesRoman", Font.BOLD, 20));
+					    g.drawString("We have gathered "+ rainwater + " units of water " , 10, 50);
 		
-			        //for (int i = 0; i < waterArr.length; i++) {
-			        	
-			        //	System.out.println(waterArr[i]);
-			       // }
-		
+			       
 			        
-					int WatRecX = 5;
+					int WreX = 5;
+					
+					for(int j=0; j< waterArr.length; j++){
 
-			        ////////  draw water
-			        for(int j=0; j< waterArr.length; j++){
-						// calculate the amount of the rectangles to be drawn
-						int calRecAm = waterArr[j];
-						calRecAm = calRecAm * 50; 
-						numberOFRec = 500 - calRecAm;
+						int NumberOFlndScap = lndScap[j];
+						int yOFlndScap = NumberOFlndScap * 50;
+						int StartYlAND = 500 - yOFlndScap; 
+				    	System.out.println("from " +  StartYlAND  );
+					
+						
+						int YRecWater = waterArr[j] * 50;
+						
+					    for (int i = 500 ; i >= StartYlAND ; i-=50) {
+					    	System.out.println("from " +  StartYlAND +" To "+ YRecWater   );
 
 						
-						// draw the water
-						
-				    for (int i = 400 ; i >= numberOFRec ; i-=50) {
+						// draw the landscape
 				    	
-				    	if (waterArr[j] == 0) {
-				    		g.setColor(Color.white);
-				    	} else {
-				    		g.setColor(Color.BLUE);
-				    	}
-				    	g.fillRect( WatRecX, i-=5, 50, 50);
-				    }
-				    WatRecX += 52;
-					}
+					    //	if (waterArr[j] == 0) {
+					   // 		g.setColor(Color.WHITE);
+						//    	g.fillRect( WreX, i-=5, 50, 50);
 
-		
+					   // 	} 
+					    	if (waterArr[j] > 0) {					    				
+
+					    		g.setColor(Color.cyan);
+					    		int counter = waterArr[j];
+			                	System.out.println(counter+"Counter");
+				                int RectY = StartYlAND - 5;
+// draw the water spots
+				                while (counter > 0  ) {
+				                	g.fillRect( WreX,RectY , 50, 50);
+				                	RectY -= 55;
+				                    counter--;
+
+				                }
+
+					    	}
+					    }
+					    WreX += 52;
+						}
+				     
+					
+
+				      
+
+			        
 	}
 	
 	
 	
+
+
+
+
+	private String ToString(int rainwater) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
 
 
 
